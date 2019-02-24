@@ -3,7 +3,7 @@ MAINTAINER Rutger Kirkels <rutger@atention.nl>
 RUN mv /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 
 # Install Xdebug
-RUN apk --update --no-cache add autoconf g++ make && \
+RUN apk --update --no-cache add autoconf g++ make git zip && \
     pecl install xdebug-beta && \
     docker-php-ext-enable xdebug && \
     apk del --purge autoconf g++ make
