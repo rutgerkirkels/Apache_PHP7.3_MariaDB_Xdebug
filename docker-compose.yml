@@ -14,6 +14,19 @@ services:
       - "443:443"
     volumes:
       - ./www:/var/www/html
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - db
+    networks:
+      - frontend
+      - backend
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=root
   php:
     build: ./php
     networks:
@@ -29,9 +42,10 @@ services:
       - MYSQL_DATABASE=local
       - MYSQL_USER=root
       - MYSQL_PASSWORD=root
-
+    networks:
+      - backend
   mailhog:
-    image: skilldlabs/mailhog
+    image: skilldlabs/mailhog:latest
     ports:
       - "8025:8025"
 networks:
