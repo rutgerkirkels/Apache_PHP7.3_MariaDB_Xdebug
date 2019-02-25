@@ -14,6 +14,9 @@ RUN sed -i \
         -e 's/^#\(LoadModule .*mod_socache_shmcb.so\)/\1/' \
         conf/httpd.conf
 
+# Enable rewrite
+RUN sed -i '/LoadModule rewrite_module/s/^#//g' /usr/local/apache2/conf/httpd.conf
+
 RUN echo "Include /usr/local/apache2/conf/apache.conf" \
     >> /usr/local/apache2/conf/httpd.conf
 
