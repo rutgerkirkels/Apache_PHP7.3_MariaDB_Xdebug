@@ -4,6 +4,7 @@ MAINTAINER Rutger Kirkels <rutger@atention.nl>
 RUN apk update; \
     apk upgrade;
 
+
 COPY apache.conf /usr/local/apache2/conf/apache.conf
 COPY server.crt /usr/local/apache2/conf/server.crt
 COPY server.key /usr/local/apache2/conf/server.key
