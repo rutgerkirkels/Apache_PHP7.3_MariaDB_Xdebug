@@ -3,12 +3,12 @@ MAINTAINER Rutger Kirkels <rutger@atention.nl>
 RUN mv /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 
 # Install Xdebug
-RUN apk --update --no-cache add autoconf g++ make git zip openldap-dev && \
+RUN apk --update --no-cache add autoconf g++ make git zip openldap-dev libpng-dev libjpeg-turbo-dev libwebp-dev zlib-dev libxpm-dev freetype-dev && \
     pecl install xdebug-beta && \
     docker-php-ext-enable xdebug && \
     apk del --purge autoconf g++ make
-
-RUN docker-php-ext-install ldap pdo pdo_mysql
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+RUN docker-php-ext-install ldap pdo pdo_mysql gd
 
 # Configure Xdebug to interact with PHPstorm
 ENV XDEBUGINI_PATH=/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
