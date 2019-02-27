@@ -48,6 +48,8 @@ services:
     image: skilldlabs/mailhog:latest
     ports:
       - "8025:8025"
+    networks:
+      - backend
 networks:
   frontend:
   backend:
